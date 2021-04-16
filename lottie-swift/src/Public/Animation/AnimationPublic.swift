@@ -180,11 +180,7 @@ public extension Animation {
   }
   
   func hasTextLayer(withName name: String) -> Bool {
-    let layer = self.layers.first { (layer) -> Bool in
-        return layer.name == name
-    }
-    
-    return layer is TextLayerModel
+    return self.layers.first { $0.name == name } is TextLayerModel
   }
 
   /// The duration in seconds of the animation.
