@@ -66,6 +66,12 @@ open class AnimationView: LottieView {
     }
   }
   
+  public var animationLayerCurrentFrameHandler: ((_ currentFrame: CGFloat) -> Void)? {
+    didSet {
+        self.animationLayer?.currentFrameHandler = self.animationLayerCurrentFrameHandler
+    }
+  }
+        
   /// Set animation name from Interface Builder
   @IBInspectable var animationName: String? {
     didSet {
@@ -816,6 +822,7 @@ open class AnimationView: LottieView {
     
     let animationLayer = AnimationContainer(animation: animation, imageProvider: imageProvider, textProvider: textProvider, fontProvider: fontProvider)
     animationLayer.renderScale = self.screenScale
+    animationLayer.currentFrameHandler = animationLayerCurrentFrameHandler
     viewLayer?.addSublayer(animationLayer)
     self.animationLayer = animationLayer
     reloadImages()

@@ -18,7 +18,8 @@ final class AnimationContainer: CALayer {
   
   /// The animatable Current Frame Property
   @NSManaged var currentFrame: CGFloat
-  
+  var currentFrameHandler: ((_ currentFrame: CGFloat) -> Void)?
+    
   var imageProvider: AnimationImageProvider {
     get {
       return layerImageProvider.imageProvider
@@ -205,6 +206,7 @@ final class AnimationContainer: CALayer {
       newFrame = floor(newFrame)
     }
     animationLayers.forEach( { $0.displayWithFrame(frame: newFrame, forceUpdates: false) })
+    currentFrameHandler?(newFrame)
   }
   
 }

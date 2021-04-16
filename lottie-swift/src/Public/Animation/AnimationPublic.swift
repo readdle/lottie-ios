@@ -179,6 +179,10 @@ public extension Animation {
     return CGFloat(time * framerate) + startFrame
   }
   
+  func hasTextLayer(withName name: String) -> Bool {
+    return self.layers.first { $0.name == name } is TextLayerModel
+  }
+
   /// The duration in seconds of the animation.
   var duration: TimeInterval {
     return Double(endFrame - startFrame) / framerate
